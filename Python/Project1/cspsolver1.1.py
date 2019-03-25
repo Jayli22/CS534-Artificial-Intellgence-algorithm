@@ -23,12 +23,15 @@ class CSP():
 
         self.nassigns = 0
 
+        self.numassigns = 0
+
     def assign(self, var, val, assignment):
         """Add {var: val} to assignment; Discard the old value if any."""
 
         assignment[var] = val
 
         self.nassigns += 1
+        self.numassigns += 1
 
         print(" ")
 
@@ -141,6 +144,8 @@ def AC3(csp, queue=None, removals=None):
     if queue is None:
         queue = [(Xi, Xk) for Xi in csp.variables for Xk in csp.neighbors[Xi]]
 
+
+
     csp.init_curr_domains()
 
     while queue:
@@ -219,33 +224,81 @@ def first_unassigned_variable(assignment, csp):
     return [var for var in csp.variables if var not in assignment][0]
 
 
-def mrv(assignment, csp):
+def mrv_degree(assignment, csp):
 
-    """Minimum-remaining-values heuristic."""
+    """Minimum-remaining-values heuristic, degree break tie"""
 
-    mrvminvar = min([v for v in csp.variables if v not in assignment],
+    mrvd_d = dict([(var, num_legal_values(csp, var, assignment)) for var in csp.variables if var not in assignment])
 
-                           key=lambda var: num_legal_values(csp, var, assignment))
+    mrvd_order = sorted(mrvd_d.items(), key=lambda d: d[1])
 
-    csp.display(own="Variable select with mrv", assignment=assignment, curr_domains=csp.curr_domains)
+    mrvmin = mrvd_order[0][1]
 
-    if csp.curr_domains:
+    mrvdmaxvar = max([v for (v, value) in mrvd_order if value == mrvmin], key=lambda v: len(csp.neighbors[v]))
 
-        mrvmin = len(csp.curr_domains[mrvminvar])
-
-    else:
-
-        mrvmin = sum(csp.num_conflicts(mrvminvar, val, assignment) == 0
-                                                for val in csp.domains[mrvminvar])
+    csp.display(own="Variable select with mrv_degree", assignment=assignment, curr_domains=csp.curr_domains)
 
     print(" ")
     for l in range(len(assignment) + 1):
         print(" ", end="")
 
-    print("Select mrv variable:", mrvminvar, "...mrv:", mrvmin)
+    print("Select mrv_maxdegree variable:", mrvdmaxvar, "...mrv degree:", mrvmin, " ", len(csp.neighbors[mrvdmaxvar]))
 
-    return mrvminvar
+    return mrvdmaxvar
 
+def mrv_maxtlen(assignment, csp):
+
+    """Minimum-remaining-values heuristic, max length task break tie"""
+
+    nlv_d = dict([(var, num_legal_values(csp, var, assignment)) for var in csp.variables if var not in assignment])
+
+    nlv_order = sorted(nlv_d.items(), key = lambda d:d[1])
+    #nlv_or=sorted(csgraph["vertex"].items(),key=lambda item:item[1])
+
+   # mrvmin = nlv_d[0][1]
+    #mrvmin=nlv_or[0][0]
+
+   # mrvmaxtlvar=nlv_d[mrvmin]
+
+    mrvmaxtlvar = max([v for v in nlv_d ], key=lambda v:csp.variables[v])
+   # mrvmaxtlvar = max([v for (v, value) in nlv_order if value == mrvmin],key=lambda v:csgraph["vertex"][v])
+
+    csp.display(own="Variable select with mrv_maxtlen", assignment=assignment, curr_domains=csp.curr_domains)
+
+    print(" ")
+    for l in range(len(assignment) + 1):
+        print(" ", end="")
+
+    # print("Select variable of mrv and max length:", mrvmaxtlvar,
+    #                         "...mrv maxl:", mrvmin, " ", csp.variables[mrvmaxtlvar])
+
+    print("Select variable of mrv and max length:", mrvmaxtlvar,
+                             "...mrv maxl:", "xx", " ", csp.variables[mrvmaxtlvar])
+
+    return mrvmaxtlvar
+
+def mrv_fixlen(assignment, csp):
+
+    """Minimum-remaining-values heuristic, max length task break tie"""
+
+    nlv_d = dict([(var, num_legal_values(csp, var, assignment)) for var in csp.variables if var not in assignment])
+
+    nlv_order = sorted(nlv_d.items(), key = lambda d:d[1])
+
+    mrvmin = nlv_order[0][1]
+
+    mrvmaxtlvar = max([v for (v, value) in nlv_order if value == mrvmin], key=lambda v:csp.variables[v])
+
+    csp.display(own="Variable select with mrv_maxtlen", assignment=assignment, curr_domains=csp.curr_domains)
+
+    print(" ")
+    for l in range(len(assignment) + 1):
+        print(" ", end="")
+
+    print("Select variable of mrv and max length:", mrvmaxtlvar,
+                            "...mrv maxl:", mrvmin, " ", csp.variables[mrvmaxtlvar])
+
+    return mrvmaxtlvar
 
 def num_legal_values(csp, var, assignment):
 
@@ -276,9 +329,12 @@ def lcv(var, assignment, csp):
 
     lcvorder= sorted((csp.curr_domains or csp.domains)[var],
 
-                  key=lambda val: csp.num_conflicts(var, val, assignment))
+                  key=lambda val: sum(not csp.constraints(var, val, var2, y) for var2 in csp.neighbors[var]
+                                      for y in (csp.curr_domains or csp.domains)[var2]))
 
-    csp.display(own="select value in order_domain_values-lcv", assignment=assignment,  curr_domains=csp.curr_domains)
+    # csp.num_conflicts(var, val, assignment) +
+
+    csp.display(own="select value in order of lcv", assignment=assignment,  curr_domains=csp.curr_domains)
 
     print(" ")
 
@@ -288,6 +344,30 @@ def lcv(var, assignment, csp):
     print("lcv order of", "variable", var, ":", lcvorder)
 
     return lcvorder
+
+
+def minpcost(var, assignment, csp):
+
+    """Least-constraining-values heuristic."""
+
+    minpcostorder = sorted((csp.curr_domains or csp.domains)[var],
+
+                      key=lambda pcost: csp.pandcs[pcost])
+
+    # lcvorder= sorted((csp.curr_domains or csp.domains)[var],
+    #
+    #               key=lambda val: csp.num_conflicts(var, val, assignment))
+
+    csp.display(own="select value in order of minpcost", assignment=assignment,  curr_domains=csp.curr_domains)
+
+    print(" ")
+
+    for l in range(len(assignment) + 1):
+        print(" ", end="")
+
+    print("minpcost order of", "variable", var, ":", minpcostorder)
+
+    return minpcostorder
 
 
 # Inference
@@ -372,13 +452,25 @@ def backtracking_search(csp,
 class tasksCSP(CSP):
     """The subclass  for a tasks schedule."""
 
+    def __init__(self, variables, domains, neighbors, pandcs, constraints):
+        """Construct a CSP . If variables is empty, it becomes domains.keys()."""
+        super().__init__(variables, domains, neighbors, constraints)
+
+        self.pandcs = pandcs
+
+
     def num_conflicts(self, var, val, assignment):
         """Return the number of conflicts var=val has with other variables."""
 
         def conflict(var2):
 
-            return (var2 in assignment  and
-                        not self.constraints(var, val, var2, assignment[var2], assignment=assignment))
+            if var2 in assignment:
+
+                return not self.constraints(var, val, var2, assignment[var2], assignment=assignment)
+
+            else:
+
+                return not self.constraints(var, val, "deadline", "deadline", assignment=assignment)
 
         if self.neighbors[var] == []:
 
@@ -396,7 +488,7 @@ class tasksCSP(CSP):
         for l in range(self.nassigns+1):
             print("-", end="")
 
-        print('Search level', self.nassigns, '(num of assign:', self.nassigns, ")")
+        print('Search level', self.nassigns, '(num of assign:', self.numassigns, ")")
 
         for l in range(self.nassigns+1):
             print(" ", end="")
@@ -467,19 +559,27 @@ class tasksCSP(CSP):
                   sum(sum(self.variables[t] for t in pfort[pkey] if pfort[pkey] != []) for pkey in pfort.keys()))
 
 
-def input_file(filename):
+            pcost = list(self.pandcs.values())[0]
+            if pcost != -1:
+                for l in range(self.nassigns + 1):
+                    print(" ", end="")
+                print("The total costs of all tasks:",
+                  sum(sum(self.variables[t] for t in pfort[pkey] if pfort[pkey] != [])*self.pandcs[pkey] for pkey in pfort.keys()))
+
+
+def input_file():
 
     processors = []
 
   #  inputString = input("Please input : search graphName.txt")
   #  inputFile = inputString.split()
 
-    # inputFile = input("Please input task CSP input file Name(csp.txt): ")
+    inputFile = input("Please input task CSP input file Name(csp.txt): ")
 
     try:
 
-        #f = open(inputFile, 'r')
-        f = open(filename, 'r')
+        f = open(inputFile, 'r')
+        # f = open("csp2.txt", 'r')
 
         fline = f.readlines()
 
@@ -511,7 +611,15 @@ def init_tasks_csgraph(fline):
         task = line.split()
         tasks[task[0]] = int(task[1])
 
-    processors = fline[valuei+1:deadlinei]
+    pandcs = {}
+    for line in fline[valuei+1:deadlinei]:
+        pc = line.split()
+        if len(pc) == 2:
+            pandcs[pc[0]] = int(pc[1])
+        else:
+            pandcs[pc[0]] = -1
+
+    processors = list(pandcs.keys())
 
     deadline = int(fline[deadlinei+1])
 
@@ -555,6 +663,7 @@ def init_tasks_csgraph(fline):
 
     print("tasks:", tasks)
     print("task variable:", list(tasks.keys()))
+    print("processor and costs:", pandcs)
     print("processors:", processors)
     print("deadline:", deadline)
 
@@ -583,7 +692,7 @@ def init_tasks_csgraph(fline):
                 if i == j:
                     cs_matrix_row[j] = 1
             cs_matrix.append(cs_matrix_row)
-        cs_dict[b[0]+b[2]] = cs_matrix
+        cs_dict[(b[0],b[2])] = cs_matrix
 
     for b in binarynoeqcs:
         cs_matrix = []
@@ -594,7 +703,7 @@ def init_tasks_csgraph(fline):
                 if i == j:
                     cs_matrix_row[j] = 0
             cs_matrix.append(cs_matrix_row)
-        cs_dict[b[0]+b[2]] = cs_matrix
+        cs_dict[(b[0],b[2])] = cs_matrix
 
     for bnskey in binarynotscs.keys():
         cs_matrix = []
@@ -607,7 +716,7 @@ def init_tasks_csgraph(fline):
                 if row == pi and col == pj:
                     cs_matrix_row[col] = 0
             cs_matrix.append(cs_matrix_row)
-        cs_dict[bnskey[0]+bnskey[1]] = cs_matrix
+        cs_dict[(bnskey[0],bnskey[1])] = cs_matrix
 
     for uinkey in unaryincs.keys():
         dp = processors[:]
@@ -690,6 +799,7 @@ def init_tasks_csgraph(fline):
                 print("system exit!")
                 sys.exit(0)
 
+
                 # return False
 
         if domains:
@@ -702,17 +812,84 @@ def init_tasks_csgraph(fline):
 
         return domains
 
+    domains = pre_handle(unaryincs, unaryexcs, binaryeqcs)
+
+    for be in binaryeqcs:
+
+        tasks[be[0] + be[2]] = tasks[be[0]] + tasks[be[2]]
+        del tasks[be[0]]
+        del tasks[be[2]]
+
+        neighborl  = list((set(neighbors[be[0]]) | set(neighbors[be[2]])) - set([be[0], be[2]]))
+        neighbors[be[0] + be[2]] = neighborl
+        for n in neighborl:
+            neighbors[n] = []
+            neighbors[n].append(be[0] + be[2])
+        del neighbors[be[0]]
+        del neighbors[be[2]]
+
+        del cs_dict[(be[0], be[2]) or (be[2], be[0])]
+        tempdict = {}
+        for cskey in cs_dict.keys():
+            if be[0] in cskey:
+                (T1, T2) = cskey
+                if T1 == be[0]:
+                    tempdict[(be[0] + be[2], T2)] = cs_dict[cskey]
+                else:
+                    tempdict[(T1, be[0] + be[2])] = cs_dict[cskey]
+            elif be[2] in cskey:
+                (T1, T2) = cskey
+                if T1 == be[2]:
+                    tempdict[(be[0] + be[2], T2)] = cs_dict[cskey]
+                else:
+                    tempdict[(T1, be[0] + be[2])] = cs_dict[cskey]
+            else:
+                tempdict[cskey] = cs_dict[cskey]
+
+        cs_dict = tempdict
+
+
+        domains[be[0] + be[2]] = domains[be[0]]
+        del domains[be[0]]
+        del domains[be[2]]
+
+    print("  ")
+    print("After merge binary equal constraints:")
+
+    print("tasks:", tasks)
+    print("task variable:", list(tasks.keys()))
+    print("processor and costs:", pandcs)
+    print("processors:", processors)
+    print("deadline:", deadline)
+
+    print("neighbors:", neighbors)
+
+    if domains:
+        for key in domains:
+            print(key, ":", domains[key])
+
+    for key in cs_dict.keys():
+        print(key, ":")
+        if key != "deadline":
+            for i in range(len(processors)):
+                print(cs_dict[key][i])
+        else:
+            print(cs_dict[key])
+        print("")
+
     csgraph = {}
 
-    csgraph["domains"] = pre_handle(unaryincs, unaryexcs, binaryeqcs)
+    csgraph["domains"] = domains
     csgraph["vertex"] = tasks
     csgraph["neighbors"] = neighbors
-    csgraph["processors"] = processors
+    csgraph["pandcs"] = pandcs
     csgraph["cs_dict"] = cs_dict
+    #csgraph["task"]=
+
     return csgraph
 
 
-fline = input_file("input3.txt")
+fline = input_file()
 
 csgraph = init_tasks_csgraph(fline)
 
@@ -721,7 +898,7 @@ def tasks_constraints(T1, p1, T2, p2, assignment={}, csg=csgraph):
     """Constraint is satisfied return true"""
 
     tasks = csg["vertex"]
-    processors = csg["processors"]
+    processors = list(csg["pandcs"].keys())
     cs_dict = csg["cs_dict"]
 
     pfort = {}
@@ -758,41 +935,44 @@ def tasks_constraints(T1, p1, T2, p2, assignment={}, csg=csgraph):
 
             return False
 
-    if T1+T2 in cs_dict.keys():
+    if (T1,T2) in cs_dict.keys():
 
         row = processors.index(p1)
         col = processors.index(p2)
 
-        return (bool(cs_dict[T1+T2][row][col])) and not outofdeadline(pfort)
+        return (bool(cs_dict[(T1,T2)][row][col])) and not outofdeadline(pfort)
 
-    elif T2+T1 in cs_dict.keys():
+    elif (T2,T1) in cs_dict.keys():
 
         row = processors.index(p2)
         col = processors.index(p1)
 
-        return (bool(cs_dict[T2+T1][row][col])) and not outofdeadline(pfort)
+        return (bool(cs_dict[(T2,T1)][row][col])) and not outofdeadline(pfort)
 
     else:
 
         return not outofdeadline(pfort)
 
 
-taskscsp = tasksCSP(csgraph["vertex"], csgraph["domains"], csgraph["neighbors"], tasks_constraints)
+taskscsp = tasksCSP(csgraph["vertex"], csgraph["domains"], csgraph["neighbors"], csgraph["pandcs"], tasks_constraints)
 
 print("  ")
 print("Select:")
 
-print("  1. no param backtracking_search.")
-print("  2. backtracking_search with mrv lcv mac.")
+print("  1. no params backtracking_search.")
+print("  2. backtracking_search with mrv_degree lcv mac-AC3.")
+print("  3. less costs with mrv_maxtlen minpcost mac-AC3.(processors have costs select it)")
 print("  0. exit.")
 print("  ")
 
-inputs = input("Please input your select number(1 or 2):")
+inputs = input("Please input your select number(1 or 2 or 3):")
 
 if inputs == "1":
     backtracking_search(taskscsp)
 elif inputs == "2":
-    backtracking_search(taskscsp, mrv, lcv, mac)
+    backtracking_search(taskscsp, mrv_degree, lcv, mac)
+elif inputs == "3":
+    backtracking_search(taskscsp, mrv_maxtlen, minpcost, mac)
 else:
     print(" ")
     print("system exit!")

@@ -1,6 +1,6 @@
 import  random
 import sys
-
+import re
 class CSP():
     """The abstract class for a csp."""
 
@@ -160,9 +160,9 @@ def AC3(csp, queue=None, removals=None):
                 print("infernce False!")
                 return False
 
-            for Xk in csp.neighbors[Xi]:
-                if Xk != Xj:
-                    queue.append((Xk, Xi))
+            #for Xk in csp.neighbors[Xi]:
+                #if Xk != Xj:
+                    #queue.append((Xk, Xi))
 
     print(" ")
     for l in range(csp.nassigns + 1):
@@ -536,7 +536,7 @@ class tasksCSP(CSP):
 
             pfort = {}
 
-            for p in list("pqrxyz"):
+            for p in list(csgraph["pandcs"]):
                 pfort[p] = []
 
             for task in assignment.keys():
@@ -608,8 +608,14 @@ def init_tasks_csgraph(fline):
 
     tasks = {}
     for line in fline[vari+1:valuei]:
-        task = line.split()
-        tasks[task[0]] = int(task[1])
+        #task = line.split()
+       #tasks[task[0]] = int(task[1])
+        task = str.split(line)
+        if not len(task) == 1:
+            tasks[task[0]] = int(task[1])
+        else:
+            tasks[task[0]] = 0
+
 
     pandcs = {}
     for line in fline[valuei+1:deadlinei]:
@@ -621,7 +627,9 @@ def init_tasks_csgraph(fline):
 
     processors = list(pandcs.keys())
 
-    deadline = int(fline[deadlinei+1])
+    deadline = 0
+    for line in fline[deadlinei+1:unaryini]:
+        deadline = int(fline[deadlinei+1])
 
     unaryincs = {}
     for u in fline[unaryini+1:unaryexi]:
@@ -692,7 +700,8 @@ def init_tasks_csgraph(fline):
                 if i == j:
                     cs_matrix_row[j] = 1
             cs_matrix.append(cs_matrix_row)
-        cs_dict[(b[0],b[2])] = cs_matrix
+            l = b.split()
+        cs_dict[(l[0],l[1])] = cs_matrix
 
     for b in binarynoeqcs:
         cs_matrix = []
@@ -703,7 +712,8 @@ def init_tasks_csgraph(fline):
                 if i == j:
                     cs_matrix_row[j] = 0
             cs_matrix.append(cs_matrix_row)
-        cs_dict[(b[0],b[2])] = cs_matrix
+            l = b.split()
+        cs_dict[(l[0],l[1])] = cs_matrix
 
     for bnskey in binarynotscs.keys():
         cs_matrix = []
