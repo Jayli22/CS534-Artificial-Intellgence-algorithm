@@ -225,9 +225,9 @@ def decision_tree():
 
     y = np_utils.to_categorical(labels, 10)
 
-    # split set
+    # split set create features
     sss = StratifiedShuffleSplit(n_splits=10, test_size=0.4, train_size=0.6, random_state=None)
-    # sssV=StratifiedShuffleSplit(n_splits=10,test_size=0.15,train_size=0.6,random_state=None)
+
     for train_index, rest_index in sss.split(images, labels):
         # print(train_index,rest_index)
         validationSize = int(np.size(rest_index) * 0.375)
@@ -257,8 +257,9 @@ def decision_tree():
     # print(tree_grid.best_params_, tree_grid.best_score_)
     cm = confusion_matrix(y_test, tree_pred)
     print(cm)
-    dtree.save("Decision_train_model.hw6")
+    from joblib import dump, load
+    dump(dtree,'decisiontree_model.h5')
 
-main()
-# decision_tree()
+# main()
+decision_tree()
 # def load_data (path='images.npy'):
