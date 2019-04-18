@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c89fd1f-5d17-43ae-be57-c3f7efd29fe6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/RecognizeDT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecognizeANN.py" beforeDir="false" afterPath="$PROJECT_DIR$/RecognizeANN.py" afterDir="false" />
-    </list>
+    <list default="true" id="5c89fd1f-5d17-43ae-be57-c3f7efd29fe6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +29,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RecognizeANN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3764">
+            <state relative-caret-position="4579">
               <caret line="259" column="4" selection-start-line="259" selection-start-column="4" selection-end-line="260" selection-end-column="39" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -45,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RecognizeDT.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="139" column="88" selection-start-line="139" selection-start-column="88" selection-end-line="139" selection-end-column="88" />
+            <state relative-caret-position="156">
+              <caret line="114" column="42" lean-forward="true" selection-start-line="114" selection-start-column="42" selection-end-line="114" selection-end-column="42" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -92,9 +88,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1675" />
-    <option name="y" value="10" />
-    <option name="width" value="2096" />
+    <option name="x" value="1674" />
+    <option name="y" value="9" />
+    <option name="width" value="2097" />
     <option name="height" value="2100" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -230,16 +226,17 @@
       <workItem from="1554912632425" duration="27962000" />
       <workItem from="1555451651875" duration="1855000" />
       <workItem from="1555455023292" duration="7551000" />
+      <workItem from="1555551034493" duration="598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45468000" />
+    <option name="totallyTimeSpent" value="46066000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1117" y="7" width="1397" height="1400" extended-state="0" />
+    <frame x="1116" y="6" width="1398" height="1400" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16903515" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17189835" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -298,16 +295,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/New/Lib/site-packages/sklearn/metrics/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4484">
-          <caret line="254" selection-start-line="254" selection-end-line="254" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RecognizeANN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3764">
+        <state relative-caret-position="4579">
           <caret line="259" column="4" selection-start-line="259" selection-start-column="4" selection-end-line="260" selection-end-column="39" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -315,10 +305,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/New/Lib/site-packages/sklearn/metrics/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4484">
+          <caret line="254" selection-start-line="254" selection-end-line="254" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RecognizeDT.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="139" column="88" selection-start-line="139" selection-start-column="88" selection-end-line="139" selection-end-column="88" />
+        <state relative-caret-position="156">
+          <caret line="114" column="42" lean-forward="true" selection-start-line="114" selection-start-column="42" selection-end-line="114" selection-end-column="42" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
