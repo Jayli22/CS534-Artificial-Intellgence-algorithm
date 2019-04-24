@@ -172,7 +172,7 @@ def init_sudoku(fline):
                         neighbor[str(x) + "," + str(y)].append(str(j) + "," + str(k))
                        # neighbor[str(x) + "," + str(y)] = str(j) + "," + str(k)
 
-    print("neighber:")
+    print("neighbor:")
     print(neighbor)
 
     known={}
