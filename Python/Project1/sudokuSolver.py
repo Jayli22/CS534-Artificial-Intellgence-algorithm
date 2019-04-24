@@ -469,7 +469,7 @@ class tasksCSP(CSP):
         if assignment:
 
             print(bstr, 'assignment:', assignment)
-            outputmatrix = np.zeros((9,9),dtype=np.int)
+            outputmatrix = np.zeros((,9),dtype=np.int)
             for key in assignment.keys():
                 xy = key.split(",",1)
                 outputmatrix[int(xy[0])][int(xy[1])] = assignment[key]

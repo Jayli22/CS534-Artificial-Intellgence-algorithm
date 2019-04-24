@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25593243-9f1c-48ba-a766-6dfce1d53321" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sudoku1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sudokuSolver.py" beforeDir="false" afterPath="$PROJECT_DIR$/sudokuSolver.py" afterDir="false" />
     </list>
@@ -12,8 +13,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Project1$sudokuSolver.coverage" NAME="sudokuSolver Coverage Results" MODIFIED="1555989306123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project1$sudokuSolver.coverage" NAME="sudokuSolver Coverage Results" MODIFIED="1556050927645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project1$cspsolver2.coverage" NAME="cspsolver2 Coverage Results" MODIFIED="1553058173437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project1$sudokuSolver2.coverage" NAME="sudokuSolver2 Coverage Results" MODIFIED="1556073763185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project1$cspsolver1_1.coverage" NAME="cspsolver1.1 Coverage Results" MODIFIED="1553045605485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -50,11 +52,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sudokuSolver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="486" lean-forward="true" selection-start-line="486" selection-end-line="486" />
+            <state relative-caret-position="8987">
+              <caret line="475" column="31" selection-start-line="470" selection-start-column="10" selection-end-line="475" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sudoku1.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sudokuSolver2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="82" column="58" selection-start-line="82" selection-start-column="58" selection-end-line="82" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -101,12 +121,13 @@
       <find>lcv</find>
       <find>unaryincs</find>
       <find>max</find>
-      <find>input</find>
       <find>display</find>
       <find>variables</find>
       <find>[assignment[task]]</find>
       <find>assignment[task]</find>
       <find>split</find>
+      <find>Current information:</find>
+      <find>input</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -118,15 +139,17 @@
         <option value="$PROJECT_DIR$/input3.txt" />
         <option value="$PROJECT_DIR$/cspsolver1.1.py" />
         <option value="$PROJECT_DIR$/cspsolver2.py" />
+        <option value="$PROJECT_DIR$/sudoku1.txt" />
         <option value="$PROJECT_DIR$/sudokuSolver.py" />
+        <option value="$PROJECT_DIR$/sudokuSolver2.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="484" />
-    <option name="y" value="163" />
-    <option name="width" value="3234" />
-    <option name="height" value="1886" />
+    <option name="x" value="337" />
+    <option name="y" value="271" />
+    <option name="width" value="2586" />
+    <option name="height" value="1464" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -167,7 +190,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.sudokuSolver">
+  <component name="RunManager" selected="Python.sudokuSolver2">
     <configuration name="cspsolver1.1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Project1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,8 +257,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="sudokuSolver2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Project1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sudokuSolver2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.sudokuSolver2" />
         <item itemvalue="Python.sudokuSolver" />
         <item itemvalue="Python.cspsolver2" />
         <item itemvalue="Python.cspsolver1.1" />
@@ -257,22 +303,25 @@
       <workItem from="1555701791919" duration="5188000" />
       <workItem from="1555975881139" duration="5069000" />
       <workItem from="1555987429350" duration="2590000" />
+      <workItem from="1556050682594" duration="1974000" />
+      <workItem from="1556072644615" duration="933000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35303000" />
+    <option name="totallyTimeSpent" value="38210000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="323" y="109" width="2156" height="1257" extended-state="0" />
+    <frame x="117" y="177" width="1724" height="976" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13931298" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1796875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4977778" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39693356" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4964455" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39620402" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -299,11 +348,6 @@
           <url>file://$PROJECT_DIR$/cspsolver1.1.py</url>
           <line>418</line>
           <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sudokuSolver.py</url>
-          <line>474</line>
-          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -342,6 +386,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sudokuSolver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8987">
+          <caret line="475" column="31" selection-start-line="470" selection-start-column="10" selection-end-line="475" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sudoku1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/input3.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -363,10 +421,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sudokuSolver.py">
+    <entry file="file://$PROJECT_DIR$/sudokuSolver2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="486" lean-forward="true" selection-start-line="486" selection-end-line="486" />
+        <state relative-caret-position="228">
+          <caret line="82" column="58" selection-start-line="82" selection-start-column="58" selection-end-line="82" selection-end-column="58" />
         </state>
       </provider>
     </entry>
